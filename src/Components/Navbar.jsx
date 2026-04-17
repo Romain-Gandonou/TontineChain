@@ -1,80 +1,124 @@
 import React, { useState } from "react";
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed w-full z-50 bg-white shadow-md">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Nom */}
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-xl bg-linear-to-br from-green-500 to-blue-600 flex items-center justify-center text-white font-bold">
-            TC
-          </div>
-          <div>
-            <h1 className="text-lg font-bold text-gray-800">Tontine</h1>
-            <span className="text-sm text-green-600">Chain</span>
-          </div>
+    <nav className="fixed inset-x-0 top-0 z-50 border-b border-[#31a64a] bg-[#08285c]/95 backdrop-blur">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+        <div className="flex items-center gap-3">
+          <motion.div
+            initial={{ rotate: -8, scale: 0.9 }}
+            animate={{ rotate: 0, scale: 1 }}
+            transition={{ duration: 0.4 }}
+            className="grid h-11 w-11 place-items-center rounded-xl bg-[#31a64a] text-white shadow-md shadow-[#31a64a]/35"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              className="h-6 w-6"
+            >
+              <path d="M7 3v18M17 3v18M3 7h4m10 0h4M3 17h4m10 0h4M9 12h6" />
+            </svg>
+          </motion.div>
+          <h1 className="text-xl font-semibold text-white md:text-2xl">
+            Tontine Chain
+          </h1>
+          <motion.span
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="hidden items-center gap-1 rounded-full border border-[#3eaf56] bg-[#0f3a68] px-2 py-1 text-[10px] text-[#8ee892] md:flex"
+          >
+            <Sparkles className="h-3.5 w-3.5" />
+            Hackathon Demo
+          </motion.span>
         </div>
 
-        {/* Menu */}
-        <ul className="hidden md:flex items-center gap-8 text-gray-700 font-medium">
+        <ul className="hidden items-center gap-1 text-sm font-medium text-white xl:flex">
           <li>
-            <a href="#acceuil" className="hover:text-green-600 transition">
+            <a
+              href="#accueil"
+              className="rounded-xl bg-[#45b152] px-4 py-2 text-white transition hover:bg-[#3ca248]"
+            >
               Accueil
             </a>
           </li>
           <li>
-            <a href="#solution" className="hover:text-green-600 transition">
-              Solution
+            <a
+              href="#contact"
+              className="px-3 py-2 transition hover:text-[#90dc8f]"
+            >
+              Créer Tontine
             </a>
           </li>
           <li>
-            <a href="#contact" className="hover:text-green-600 transition">
-              Contact
+            <a
+              href="#solution"
+              className="px-3 py-2 transition hover:text-[#90dc8f]"
+            >
+              Tableau de Bord
+            </a>
+          </li>
+          <li>
+            <a
+              href="#solution"
+              className="px-3 py-2 transition hover:text-[#90dc8f]"
+            >
+              Paiement
+            </a>
+          </li>
+          <li>
+            <a
+              href="#solution"
+              className="px-3 py-2 transition hover:text-[#90dc8f]"
+            >
+              Historique
             </a>
           </li>
         </ul>
 
-        <div className="hidden md:block">
-          <a
-            href="#demo"
-            className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
-          >
-            Démo
-          </a>
-        </div>
-
-        {/* petit ecran navbar */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-2xl"
+          className="text-2xl text-white xl:hidden"
+          aria-label="Ouvrir le menu"
         >
           ☰
         </button>
       </div>
 
-      {/* menu petit ecran */}
-      {isOpen && (
-        <div className="md:hidden bg-white border-t px-6 py-4 space-y-4">
-          <a href="#acceuil" className="block text-gray-700">
-            Accueil
-          </a>
-          <a href="#solution" className="block text-gray-700">
-            Solution
-          </a>
-          <a href="#contact" className="block text-gray-700">
-            Contact
-          </a>
-
-          <a
-            href="#demo"
-            className="block text-center bg-green-500 text-white py-2 rounded-lg"
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="space-y-3 overflow-hidden border-t border-[#1e4e88] bg-[#08285c] px-6 py-4 text-sm text-white xl:hidden"
           >
-            Voir la démo
-          </a>
-        </div>
-      )}
+            <a href="#accueil" className="block">
+              Accueil
+            </a>
+            <a href="#contact" className="block">
+              Créer Tontine
+            </a>
+            <a href="#solution" className="block">
+              Tableau de Bord
+            </a>
+            <a href="#solution" className="block">
+              Paiement
+            </a>
+            <a href="#solution" className="block">
+              Historique
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
