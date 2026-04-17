@@ -57,15 +57,15 @@ export default function Navbar() {
               Créer Tontine
             </a>
           </li>
-          <li>
+          {/* <li>
             <a
               href="#solution"
               className="px-3 py-2 transition hover:text-[#90dc8f]"
             >
               Tableau de Bord
             </a>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <a
               href="#solution"
               className="px-3 py-2 transition hover:text-[#90dc8f]"
@@ -80,7 +80,7 @@ export default function Navbar() {
             >
               Historique
             </a>
-          </li>
+          </li> */}
         </ul>
 
         <button
